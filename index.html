@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile - Ahmat Ardiansyah</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: white;
+    background: linear-gradient(-45deg,
+        #090979, #4b0082, #0077b6, #d00070);
+    background-size: 400% 400%;
+    animation: bgMove 10s ease infinite;
+}
+
+@keyframes bgMove {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+/* Animasi partikel */
+.bubble {
+    position: fixed;
+    bottom: -100px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    animation: naik 12s infinite linear;
+    pointer-events: none;
+}
+
+.bubble:nth-child(1) {
+    left: 10%; width: 40px; height: 40px;
+}
+.bubble:nth-child(2) {
+    left: 35%; width: 65px; height: 65px;
+    animation-delay: 3s;
+}
+.bubble:nth-child(3) {
+    left: 65%; width: 30px; height: 30px;
+    animation-delay: 5s;
+}
+.bubble:nth-child(4) {
+    left: 85%; width: 55px; height: 55px;
+    animation-delay: 2s;
+}
+
+@keyframes naik {
+    0% {transform: translateY(0) rotate(0deg); opacity: 0;}
+    20% {opacity: 1;}
+    100% {transform: translateY(-120vh) rotate(360deg); opacity: 0;}
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 750px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 0 35px rgba(0,255,255,0.3);
+    animation: muncul 1.2s ease;
+}
+
+@keyframes muncul {
+    from {opacity: 0; transform: translateY(60px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.header {
+    text-align: center;
+    padding: 20px 10px 30px;
+}
+
+.profile {
+    width: 130px;
+    height: 130px;
+    margin: auto auto 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 42px;
+    font-weight: bold;
+    background: linear-gradient(135deg,#00e5ff,#a855f7,#ff1493);
+    border: 5px solid white;
+    box-shadow: 0 0 20px #00e5ff;
+    animation: putar 6s linear infinite, melayang 3s ease-in-out infinite;
+}
+
+@keyframes putar {
+    0% {box-shadow: 0 0 10px #00e5ff;}
+    50% {box-shadow: 0 0 35px #ff00ff;}
+    100% {box-shadow: 0 0 10px #00e5ff;}
+}
+
+@keyframes melayang {
+    0%,100% {transform: translateY(0);}
+    50% {transform: translateY(-12px);}
+}
+
+h1 {
+    font-size: 30px;
+    text-shadow: 0 0 15px #00e5ff;
+    margin-bottom: 10px;
+}
+
+.typing {
+    color: #7df9ff;
+    font-size: 17px;
+    min-height: 25px;
+    font-weight: bold;
+}
+
+.title {
+    font-size: 20px;
+    margin: 25px 0 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #00e5ff;
+    color: #7df9ff;
+}
+
+.card {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.13);
+    border-left: 4px solid #00e5ff;
+    transition: 0.4s;
+    animation: geser 0.8s ease backwards;
+}
+
+.card:nth-child(2) {animation-delay: .2s;}
+.card:nth-child(3) {animation-delay: .4s;}
+.card:nth-child(4) {animation-delay: .6s;}
+.card:nth-child(5) {animation-delay: .8s;}
+
+@keyframes geser {
+    from {opacity: 0; transform: translateX(-40px);}
+    to {opacity: 1; transform: translateX(0);}
+}
+
+.card:hover {
+    transform: scale(1.04);
+    background: rgba(0,229,255,0.2);
+    box-shadow: 0 0 15px #00e5ff;
+}
+
+.label {
+    font-weight: bold;
+    color: #a5f3fc;
+}
+
+.value {
+    text-align: right;
+    font-weight: bold;
+}
+
+.about {
+    padding: 20px;
+    line-height: 1.8;
+    background: rgba(255,255,255,0.12);
+    border-radius: 15px;
+    border: 1px solid #7df9ff;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill {
+    background: linear-gradient(135deg,#0077ff,#a000ff);
+    padding: 10px 16px;
+    border-radius: 20px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    50% {box-shadow: 0 0 18px #00e5ff;}
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(90deg,#00c6ff,#a000ff,#ff1493);
+    background-size: 200% 200%;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    animation: bgMove 3s infinite;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #00e5ff;
+}
+
+footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #dbeafe;
+    font-size: 13px;
+}
+
+@media(max-width:480px) {
+    .container {padding: 20px;}
+    h1 {font-size: 23px;}
+    .card {font-size: 13px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+
+<div class="container">
+
+    <div class="header">
+        <div class="profile">AA</div>
+
+        <h1>AHMAT ARDIANSYAH</h1>
+
+        <div class="typing" id="typing"></div>
+    </div>
+
+    <h2 class="title">👤 BIODATA DIRI</h2>
+
+    <div class="card">
+        <span class="label">Nama Lengkap</span>
+        <span class="value">Ahmat Ardiansyah</span>
+    </div>
+
+    <div class="card">
+        <span class="label">Tempat Lahir</span>
+        <span class="value">Cirebon</span>
+    </div>
+
+    <div class="card">
+        <span class="label">Tanggal Lahir</span>
+        <span class="value">06 Februari 2009</span>
+    </div>
+
+ <div class="card">
+        <span class="label">Umur</span>
+        <span class="value">17 years old</span>
+    </div>
+
+    <div class="card">
+        <span class="label">Alamat</span>
+        <span class="value">Blok Pukulen Timur Rt 10 Rw 05</span>
+    </div>
+
+    <div class="card">
+        <span class="label">Sekolah</span>
+        <span class="value">SMK PGRI 1 Palimanan</span>
+    </div>
+
+    <div class="card">
+        <span class="label">Jurusan</span>
+        <span class="value">TKJ</span>
+    </div>
+
+    <div class="card">
+        <span class="label">Kelas</span>
+        <span class="value">XII TKJ 3</span>
+    </div>
+
+    <div class="card">
+        <span class="label">Hobi</span>
+        <span class="value">Bermain Komputer</span>
+    </div>
+
+    <div class="card">
+        <span class="label">Cita-cita</span>
+        <span class="value">Pengusaha IT & Enginering</span>
+    </div>
+
+    <h2 class="title">✨ TENTANG SAYA</h2>
+
+    <div class="about">
+        Halo semuanya! 👋
+
+        Perkenalkan, nama saya Ahmat Ardiansyah.
+        Saya adalah siswa SMK PGRI 1 Palimanan
+        jurusan Teknik Komputer dan Jaringan (TKJ).
+
+        Saya menyukai dunia teknologi, komputer,
+        jaringan internet, dan pemrograman.
+
+        Saya selalu bersemangat untuk belajar,
+        mencoba hal baru, dan mengembangkan
+        kemampuan di bidang teknologi.
+        
+        Salam kenal semuanya! 🚀
+    </div>
+
+    <h2 class="title">💻 MINAT & KEMAMPUAN</h2>
+
+    <div class="skills">
+        <div class="skill">💻 Komputer</div>
+        <div class="skill">🌐 Jaringan</div>
+        <div class="skill">⚡ Mikrotik</div>
+        <div class="skill">⌨️ Coding</div>
+        <div class="skill">🔧 Servis PC</div>
+    </div>
+
+    <button onclick="window.print()">
+        🖨️ CETAK / SIMPAN PDF
+    </button>
+
+    <footer>
+        © 2026 Ahmat Ardiansyah
+        <br>
+        terimakasih sudah mengunjungi website saya ❤️
+    </footer>
+
+</div>
+
+<script>
+const teks = [
+    "Selamat Datang di Website Saya!",
+    "Siswa SMK Jurusan TKJ 💻",
+    "Belajar Teknologi dan Pemrograman 🚀",
+    "Terus Berkarya dan Berinovasi ✨"
+];
+
+let i = 0;
+let j = 0;
+let hapus = false;
+
+function mengetik() {
+    const elemen = document.getElementById("typing");
+    const kalimat = teks[i];
+
+    if (!hapus) {
+        elemen.textContent = kalimat.substring(0, j + 1);
+        j++;
+
+        if (j === kalimat.length) {
+            hapus = true;
+            setTimeout(mengetik, 1500);
+            return;
+        }
+    } else {
+        elemen.textContent = kalimat.substring(0, j - 1);
+        j--;
+
+        if (j === 0) {
+            hapus = false;
+            i = (i + 1) % teks.length;
+        }
+    }
+
+    setTimeout(mengetik, hapus ? 45 : 90);
+}
+
+mengetik();
+</script>
+
+</body>
+</html>
